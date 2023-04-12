@@ -64,15 +64,20 @@ namespace samcogan.azurenative.containerService
                 {
                     UpgradeChannel = UpgradeChannel.Stable
                 },
+                
                 AgentPoolProfiles = new[]
                 {
+                    
                 new ManagedClusterAgentPoolProfileArgs
                 {
                     Name = "agentpool",
                     Count = args.NodeCount,
                     VmSize = args.NodeSize,
                     VnetSubnetID = vnet.Subnets.Apply(subnets => subnets[0].Id)!,
-                    OsType = OSType.Linux
+                    OsType = OSType.Linux,
+                    Mode = AgentPoolMode.System,
+                    OrchestratorVersion = args.AKSVersion
+                    
                     
                 },
             },
