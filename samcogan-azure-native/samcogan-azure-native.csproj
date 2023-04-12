@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Sam Cogan Azure Native Demo Component</Title>
   </PropertyGroup>
 
   <ItemGroup>
