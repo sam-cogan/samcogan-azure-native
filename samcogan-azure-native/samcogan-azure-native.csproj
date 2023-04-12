@@ -1,21 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>samcogan_azure_native</RootNamespace>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Title>Sam Cogan Azure Native Demo Component</Title>
-  </PropertyGroup>
-
-
 	<PropertyGroup>
 		<VersionMajor>1</VersionMajor>
 		<VersionMinor>0</VersionMinor>
 		<VersionPatch Condition="'$(VersionPatch)' == ''">$([System.DateTime]::UtcNow.ToString("yy"))$([System.DateTime]::UtcNow.DayOfYear.ToString("0"))</VersionPatch>
 		<VersionRevision Condition="'$(VersionRevision)' == ''">$([System.DateTime]::UtcNow.TimeOfDay.TotalSeconds.ToString("0"))</VersionRevision>
 	</PropertyGroup>
+
+
+	<PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>samcogan_azure_native</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>Sam Cogan Azure Native Demo Component</Title>
+	<Version>$(VersionMajor).$(VersionMinor).$(VersionPatch).$(VersionRevision)</Version>
+  </PropertyGroup>
+
+
 
 	<ItemGroup>
     <PackageReference Include="Pulumi.AzureNative" Version="1.99.1" />
