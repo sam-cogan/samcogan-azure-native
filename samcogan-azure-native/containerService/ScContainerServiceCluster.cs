@@ -76,6 +76,7 @@ namespace samcogan.azurenative.containerService
                     
                 },
             },
+                DnsPrefix = Output.Format($"{args.ClusterName}-dns"),
                 KubernetesVersion = args.AKSVersion,
                 NetworkProfile = new ContainerServiceNetworkProfileArgs
                 {
