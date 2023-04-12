@@ -76,7 +76,6 @@ namespace samcogan.azurenative.containerService
                     
                 },
             },
-                DnsPrefix = $"{args.ClusterName}-dns",
                 KubernetesVersion = args.AKSVersion,
                 NetworkProfile = new ContainerServiceNetworkProfileArgs
                 {
