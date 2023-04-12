@@ -40,6 +40,6 @@ jobs:
       run: dotnet pack --no-build --configuration Release
     - name: PushGithub
       # The github token is automatically being pulled from the workflow
-      run: dotnet nuget push **/*.nupkg --no-symbols --skip-duplicate
+      run: dotnet nuget push **/*.nupkg --no-symbols --skip-duplicate -k $NUGET_AUTH_TOKEN -s https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
         NUGET_AUTH_TOKEN: ${{ github.token }}
