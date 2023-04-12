@@ -39,3 +39,5 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Push generated package to GitHub registry
       run: dotnet nuget push **/*.nupkg --skip-duplicate --no-symbols true
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}   
