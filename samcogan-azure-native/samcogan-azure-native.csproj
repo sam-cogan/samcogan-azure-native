@@ -9,7 +9,15 @@
     <Title>Sam Cogan Azure Native Demo Component</Title>
   </PropertyGroup>
 
-  <ItemGroup>
+
+	<PropertyGroup>
+		<VersionMajor>1</VersionMajor>
+		<VersionMinor>0</VersionMinor>
+		<VersionPatch Condition="'$(VersionPatch)' == ''">$([System.DateTime]::UtcNow.ToString("yy"))$([System.DateTime]::UtcNow.DayOfYear.ToString("0"))</VersionPatch>
+		<VersionRevision Condition="'$(VersionRevision)' == ''">$([System.DateTime]::UtcNow.TimeOfDay.TotalSeconds.ToString("0"))</VersionRevision>
+	</PropertyGroup>
+
+	<ItemGroup>
     <PackageReference Include="Pulumi.AzureNative" Version="1.99.1" />
   </ItemGroup>
 
