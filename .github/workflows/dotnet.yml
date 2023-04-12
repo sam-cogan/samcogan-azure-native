@@ -18,7 +18,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -29,7 +29,7 @@ jobs:
         # Authenticates packages to push to GPR
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -40,4 +40,7 @@ jobs:
       run: dotnet pack --no-build --configuration Release
     - name: PushGithub
       # The github token is automatically being pulled from the workflow
-      run: dotnet nuget push samcogan-azure-native\bin\Release\*.nupkg
+      run: dotnet nuget push samcogan-azure-native/bin/Release/*.nupkg -k $NUGETKEY
+      env:
+        NUGETKEY: ${{ secrets.NugetKey }}
+        
