@@ -22,22 +22,22 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1.5.0
       with:
-        dotnet-version: 6.0.x
-        source-url: https://nuget.pkg.github.com/sam-cogan/index.json
+        dotnet-version:  6.0.x
+        # Authenticates packages to push to GPR
+        source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
-        NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}    
-      
-        
+        NUGET_AUTH_TOKEN: '%NUGET_AUTH_TOKEN%'
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Push generated package to GitHub registry
-      run: dotnet nuget push **/*.nupkg --skip-duplicate --no-symbols true --api-key ${{ secrets.GITHUB_TOKEN }}
+    - name: PushGithub
+      # The github token is automatically being pulled from the workflow
+      run: dotnet nuget push **/*.nupkg --no-symbols --skip-duplicate
       env:
         NUGET_AUTH_TOKEN: ${{ github.token }}
