@@ -16,5 +16,7 @@ namespace samcogan.azurenative.containerService
 
         public Input<string>? AddressSpace { get; set; }
         public Input<string>? SubnetName { get; set; }
+
+        public Input<string> AKSVersion { get; set; }
     }
 }
