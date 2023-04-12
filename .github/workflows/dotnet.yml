@@ -30,8 +30,6 @@ jobs:
         source-url: https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json
       env:
         NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - name: testing
-      run: cat /home/runner/work/samcogan-azure-native/nuget.config
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
