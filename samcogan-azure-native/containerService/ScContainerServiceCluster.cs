@@ -13,7 +13,9 @@ using Pulumi.AzureNative.Resources.Inputs;
 
 namespace samcogan.azurenative.containerService
 {
-
+    /// <summary>
+    /// Create an AKS cluster and associated resources for development workloads
+    /// </summary>
     public class ScContainerServiceCluster: ComponentResource
     {
         public Output<string> ClusterUrl { get; private set; }
@@ -96,10 +98,13 @@ namespace samcogan.azurenative.containerService
                 },
             }, new CustomResourceOptions { Parent = resourceGroup });
 
-
+            //Set outputs
             ClusterUrl = cluster.Fqdn;
             KubeConfig = Output.CreateSecret( Output.Tuple(resourceGroup.Name, cluster.Name)
                 .Apply(items => Output.CreateSecret(GetKubeAdminConfig(items.Item1, items.Item2))));
+
+            //Call register outputs to indicate we are done registering child resource
+            this.RegisterOutputs();
         }
 
         private static async Task<string> GetKubeAdminConfig(string resourceGroupName, string clusterName)
