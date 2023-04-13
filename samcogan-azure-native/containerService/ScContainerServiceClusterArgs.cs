@@ -10,7 +10,7 @@ namespace samcogan.azurenative.containerService
     /// <summary>
     /// Arguments to create an AKS cluster
     /// </summary>
-    public class ScContainerServiceClusterArgs: ResourceArgs
+    public class ScContainerServiceClusterArgs : ResourceArgs
     {
         /// <summary>
         /// Name of the resource group to create
@@ -23,7 +23,7 @@ namespace samcogan.azurenative.containerService
         /// <summary>
         /// Number of nodes in the cluster
         /// </summary>
-        public Input<int> NodeCount { get; set; }
+        public Input<int> NodeCount { get; set; } = 2;
 
         /// <summary>
         /// Size of the nodes in the cluster

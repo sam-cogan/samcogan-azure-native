@@ -16,7 +16,7 @@ namespace samcogan.azurenative.containerService
     /// <summary>
     /// Create an AKS cluster and associated resources for development workloads
     /// </summary>
-    public class ScContainerServiceCluster: ComponentResource
+    public class ScContainerServiceCluster : ComponentResource
     {
         public Output<string> ClusterUrl { get; private set; }
         public Output<string> KubeConfig { get; private set; }
@@ -66,10 +66,10 @@ namespace samcogan.azurenative.containerService
                 {
                     UpgradeChannel = UpgradeChannel.Stable
                 },
-                
+
                 AgentPoolProfiles = new[]
                 {
-                    
+
                 new ManagedClusterAgentPoolProfileArgs
                 {
                     Name = "agentpool",
@@ -79,8 +79,8 @@ namespace samcogan.azurenative.containerService
                     OsType = OSType.Linux,
                     Mode = AgentPoolMode.System,
                     OrchestratorVersion = args.AKSVersion
-                    
-                    
+
+
                 },
             },
                 DnsPrefix = Output.Format($"{args.ClusterName}-dns"),
@@ -100,7 +100,7 @@ namespace samcogan.azurenative.containerService
 
             //Set outputs
             ClusterUrl = cluster.Fqdn;
-            KubeConfig = Output.CreateSecret( Output.Tuple(resourceGroup.Name, cluster.Name)
+            KubeConfig = Output.CreateSecret(Output.Tuple(resourceGroup.Name, cluster.Name)
                 .Apply(items => Output.CreateSecret(GetKubeAdminConfig(items.Item1, items.Item2))));
 
             //Call register outputs to indicate we are done registering child resource
